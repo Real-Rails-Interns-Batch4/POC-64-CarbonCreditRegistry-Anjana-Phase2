@@ -1,0 +1,2538 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.dockerignore
+backend/app/main.py
+backend/Dockerfile
+backend/requirements.txt
+docker-compose.yml
+frontend/.eslintrc.json
+frontend/.git/COMMIT_EDITMSG
+frontend/.git/config
+frontend/.git/description
+frontend/.git/HEAD
+frontend/.git/hooks/applypatch-msg.sample
+frontend/.git/hooks/commit-msg.sample
+frontend/.git/hooks/fsmonitor-watchman.sample
+frontend/.git/hooks/post-update.sample
+frontend/.git/hooks/pre-applypatch.sample
+frontend/.git/hooks/pre-commit.sample
+frontend/.git/hooks/pre-merge-commit.sample
+frontend/.git/hooks/pre-push.sample
+frontend/.git/hooks/pre-rebase.sample
+frontend/.git/hooks/pre-receive.sample
+frontend/.git/hooks/prepare-commit-msg.sample
+frontend/.git/hooks/push-to-checkout.sample
+frontend/.git/hooks/sendemail-validate.sample
+frontend/.git/hooks/update.sample
+frontend/.git/index
+frontend/.git/info/exclude
+frontend/.git/logs/HEAD
+frontend/.git/logs/refs/heads/master
+frontend/.git/objects/02/1c39379d298a783317a256f478e679d3c60ddc
+frontend/.git/objects/13/d40b892057e0e4271c5c8f9fc8db30e80f2409
+frontend/.git/objects/1a/69fd2a450afc3bf47e08b22c149190df0ffdb4
+frontend/.git/objects/1b/62daacff96dad6584e71cd962051b82957c313
+frontend/.git/objects/2f/90c48fc1a5776526328b4459a1d2de16d42a7f
+frontend/.git/objects/37/224185490e6db2d26a574d66d4d476336bf644
+frontend/.git/objects/46/78774e6d606704bce1897a5dab960cd798bf66
+frontend/.git/objects/6f/e62d19b42eddd6326cfd46829c3501e4e5debc
+frontend/.git/objects/71/8d6fea4835ec2d246af9800eddb7ffb276240c
+frontend/.git/objects/7b/2858930495fc4a76d7a51d958bacf2d64eb81f
+frontend/.git/objects/a2/e6914435a5622a86ee11901f37b04e3466dc66
+frontend/.git/objects/a3/6cde01c60b91e16e4c976d00546686e2d4e470
+frontend/.git/objects/c3/bcd5a09d26a473b2596f65093bf03e47241643
+frontend/.git/objects/c5/6e5934930eac016c1740fc39bdba0ddaa66a8b
+frontend/.git/objects/cf/bc90a55cd2c37760eb4210e0565293243f39ed
+frontend/.git/objects/e2/15bc4ccf138bbc38ad58ad57e92135484b3c0f
+frontend/.git/objects/e9/9a883254cb0661116adc19cfc8572df185501c
+frontend/.git/objects/f2/ae185cbfd16946a534d819e9eb03924abbcc49
+frontend/.git/objects/fc/b741a341df889205f9868e01cdef51cc530ae9
+frontend/.git/objects/fd/3dbb571a12a1c3baf000db049e141c888d05a8
+frontend/.git/refs/heads/master
+frontend/.gitignore
+frontend/Dockerfile
+frontend/next.config.mjs
+frontend/package.json
+frontend/postcss.config.mjs
+frontend/README.md
+frontend/src/app/favicon.ico
+frontend/src/app/fonts/GeistMonoVF.woff
+frontend/src/app/fonts/GeistVF.woff
+frontend/src/app/globals.css
+frontend/src/app/layout.tsx
+frontend/src/app/page.tsx
+frontend/src/components/MapComponent.tsx
+frontend/tailwind.config.ts
+frontend/tsconfig.json
+README.md
+UAT_CHECKLIST.md
+VAR_REPORT.md
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".dockerignore">
+**/node_modules
+**/.next
+**/.git
+**/__pycache__
+**/*.pyc
+**/venv
+**/env
+**/dist
+**/build
+</file>
+
+<file path="backend/app/main.py">
+from fastapi import FastAPI, Response
+from fastapi.middleware.cors import CORSMiddleware
+import pandas as pd
+import json
+
+app = FastAPI(title="Carbon Credit Registry Explorer API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Mock/Synthetic data for Verra & Gold Standard Registry Explorer
+# Category: Governance & Trust
+projects_data = [
+    {
+        "id": "VCS-984",
+        "title": "Amazon Rainforest Conservation Project",
+        "registry": "Verra Registry",
+        "methodology": "VM0007 REDD+ Methodology",
+        "category": "Governance & Trust",
+        "credits_issued": 1250000,
+        "credits_retired": 850000,
+        "status": "Active",
+        "region": "South America",
+        "country": "Brazil",
+        "lat": -3.4653,
+        "lon": -62.2159,
+        "price_per_credit": 15.50,
+        "regional_avg_price": 12.80,
+        "verifier": "SCS Global Services",
+        "last_updated": "2026-06-15"
+    },
+    {
+        "id": "GS-4021",
+        "title": "Clean Wind Energy Grid Integration",
+        "registry": "Gold Standard Registry",
+        "methodology": "ACM0002 Grid-connected Renewables",
+        "category": "Governance & Trust",
+        "credits_issued": 450000,
+        "credits_retired": 410000,
+        "status": "Active",
+        "region": "Asia",
+        "country": "India",
+        "lat": 20.5937,
+        "lon": 78.9629,
+        "price_per_credit": 9.20,
+        "regional_avg_price": 8.50,
+        "verifier": "TÜV NORD",
+        "last_updated": "2026-05-10"
+    },
+    {
+        "id": "VCS-1123",
+        "title": "Southern Peatland Restoration and Protection",
+        "registry": "Verra Registry",
+        "methodology": "VM0034 Peatland Rewetting",
+        "category": "Governance & Trust",
+        "credits_issued": 800000,
+        "credits_retired": 320000,
+        "status": "Active",
+        "region": "Southeast Asia",
+        "country": "Indonesia",
+        "lat": -0.7893,
+        "lon": 113.9213,
+        "price_per_credit": 18.00,
+        "regional_avg_price": 14.50,
+        "verifier": "Vesta Verifiers",
+        "last_updated": "2026-07-01"
+    },
+    {
+        "id": "GS-5820",
+        "title": "Community Boreholes and Water Purification",
+        "registry": "Gold Standard Registry",
+        "methodology": "GS-TPDDTEC Safe Water Supply",
+        "category": "Governance & Trust",
+        "credits_issued": 300000,
+        "credits_retired": 285000,
+        "status": "Active",
+        "region": "Africa",
+        "country": "Kenya",
+        "lat": -1.2921,
+        "lon": 36.8219,
+        "price_per_credit": 11.50,
+        "regional_avg_price": 10.20,
+        "verifier": "Gold Standard Auditor Team",
+        "last_updated": "2026-06-28"
+    },
+    {
+        "id": "VCS-2451",
+        "title": "Mangrove Blue Carbon Coastal Protection",
+        "registry": "Verra Registry",
+        "methodology": "VM0033 Tidal Wetland Restoration",
+        "category": "Governance & Trust",
+        "credits_issued": 620000,
+        "credits_retired": 150000,
+        "status": "Under Review",
+        "region": "Central America",
+        "country": "Honduras",
+        "lat": 15.2000,
+        "lon": -86.2419,
+        "price_per_credit": 22.00,
+        "regional_avg_price": 16.50,
+        "verifier": "SCS Global Services",
+        "last_updated": "2026-04-18"
+    },
+    {
+        "id": "GS-3104",
+        "title": "Improved Biomass Cookstoves for Rural Households",
+        "registry": "Gold Standard Registry",
+        "methodology": "GS-COOKSTOVE Improved Thermal Efficiency",
+        "category": "Governance & Trust",
+        "credits_issued": 950000,
+        "credits_retired": 910000,
+        "status": "Active",
+        "region": "Africa",
+        "country": "Rwanda",
+        "lat": -1.9403,
+        "lon": 29.8739,
+        "price_per_credit": 13.00,
+        "regional_avg_price": 10.20,
+        "verifier": "Carbon Verification Corp",
+        "last_updated": "2026-07-05"
+    }
+]
+
+def calculate_insights(df: pd.DataFrame) -> pd.DataFrame:
+    # 1. Price comparison vs regional average
+    df["price_vs_regional_pct"] = ((df["price_per_credit"] - df["regional_avg_price"]) / df["regional_avg_price"]) * 100
+    
+    # 2. Retirement ratio
+    df["retirement_ratio_pct"] = (df["credits_retired"] / df["credits_issued"]) * 100
+    
+    # 3. Governance risk score (0-100 where higher is better trust/governance transparency)
+    # Built dynamically from retired ratio, verifier presence, status
+    def compute_trust_score(row):
+        score = 60.0
+        if row["status"] == "Active":
+            score += 15
+        if row["registry"] == "Gold Standard Registry":
+            score += 10 # generally stricter governance premium
+        if row["credits_retired"] > 0:
+            score += min(15, (row["credits_retired"] / row["credits_issued"]) * 15)
+        return min(100.0, score)
+
+    df["trust_score"] = df.apply(compute_trust_score, axis=1)
+    return df
+
+@app.get("/api/projects")
+def get_projects(registry: str = None, status: str = None):
+    df = pd.DataFrame(projects_data)
+    df = calculate_insights(df)
+    
+    if registry and registry != "All":
+        df = df[df["registry"] == registry]
+    if status and status != "All":
+        df = df[df["status"] == status]
+        
+    # Convert to GeoJSON or structured format
+    features = []
+    for _, row in df.iterrows():
+        feature = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [float(row["lon"]), float(row["lat"])]
+            },
+            "properties": {
+                "id": row["id"],
+                "title": row["title"],
+                "registry": row["registry"],
+                "methodology": row["methodology"],
+                "category": row["category"],
+                "credits_issued": int(row["credits_issued"]),
+                "credits_retired": int(row["credits_retired"]),
+                "status": row["status"],
+                "region": row["region"],
+                "country": row["country"],
+                "price_per_credit": float(row["price_per_credit"]),
+                "price_vs_regional_pct": round(float(row["price_vs_regional_pct"]), 1),
+                "retirement_ratio_pct": round(float(row["retirement_ratio_pct"]), 1),
+                "trust_score": round(float(row["trust_score"]), 1),
+                "verifier": row["verifier"],
+                "last_updated": row["last_updated"]
+            }
+        }
+        features.append(feature)
+        
+    return {
+        "type": "FeatureCollection",
+        "features": features
+    }
+
+@app.get("/api/stats")
+def get_stats():
+    df = pd.DataFrame(projects_data)
+    df = calculate_insights(df)
+    
+    total_issued = int(df["credits_issued"].sum())
+    total_retired = int(df["credits_retired"].sum())
+    avg_retirement_rate = round(float((total_retired / total_issued) * 100), 1)
+    avg_trust_score = round(float(df["trust_score"].mean()), 1)
+    
+    return {
+        "total_issued": total_issued,
+        "total_retired": total_retired,
+        "avg_retirement_rate": avg_retirement_rate,
+        "avg_trust_score": avg_trust_score,
+        "total_projects": len(df),
+        "active_methodologies": int(df["methodology"].nunique())
+    }
+
+@app.get("/api/download")
+def download_data():
+    df = pd.DataFrame(projects_data)
+    df = calculate_insights(df)
+    csv_data = df.to_csv(index=False)
+    return Response(
+        content=csv_data,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=carbon_registry_explorer_data.csv"}
+    )
+</file>
+
+<file path="backend/Dockerfile">
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+</file>
+
+<file path="backend/requirements.txt">
+fastapi
+uvicorn
+pandas
+</file>
+
+<file path="docker-compose.yml">
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - ENV=development
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+</file>
+
+<file path="frontend/.eslintrc.json">
+{
+  "extends": ["next/core-web-vitals", "next/typescript"]
+}
+</file>
+
+<file path="frontend/.git/COMMIT_EDITMSG">
+Initial commit from Create Next App
+</file>
+
+<file path="frontend/.git/config">
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+</file>
+
+<file path="frontend/.git/description">
+Unnamed repository; edit this file 'description' to name the repository.
+</file>
+
+<file path="frontend/.git/HEAD">
+ref: refs/heads/master
+</file>
+
+<file path="frontend/.git/hooks/applypatch-msg.sample">
+#!/bin/sh
+#
+# An example hook script to check the commit log message taken by
+# applypatch from an e-mail message.
+#
+# The hook should exit with non-zero status after issuing an
+# appropriate message if it wants to stop the commit.  The hook is
+# allowed to edit the commit message file.
+#
+# To enable this hook, rename this file to "applypatch-msg".
+
+. git-sh-setup
+commitmsg="$(git rev-parse --git-path hooks/commit-msg)"
+test -x "$commitmsg" && exec "$commitmsg" ${1+"$@"}
+:
+</file>
+
+<file path="frontend/.git/hooks/commit-msg.sample">
+#!/bin/sh
+#
+# An example hook script to check the commit log message.
+# Called by "git commit" with one argument, the name of the file
+# that has the commit message.  The hook should exit with non-zero
+# status after issuing an appropriate message if it wants to stop the
+# commit.  The hook is allowed to edit the commit message file.
+#
+# To enable this hook, rename this file to "commit-msg".
+
+# Uncomment the below to add a Signed-off-by line to the message.
+# Doing this in a hook is a bad idea in general, but the prepare-commit-msg
+# hook is more suited to it.
+#
+# SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+# grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
+
+# This example catches duplicate Signed-off-by lines.
+
+test "" = "$(grep '^Signed-off-by: ' "$1" |
+	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
+	echo >&2 Duplicate Signed-off-by lines.
+	exit 1
+}
+</file>
+
+<file path="frontend/.git/hooks/fsmonitor-watchman.sample">
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use IPC::Open2;
+
+# An example hook script to integrate Watchman
+# (https://facebook.github.io/watchman/) with git to speed up detecting
+# new and modified files.
+#
+# The hook is passed a version (currently 2) and last update token
+# formatted as a string and outputs to stdout a new update token and
+# all files that have been modified since the update token. Paths must
+# be relative to the root of the working tree and separated by a single NUL.
+#
+# To enable this hook, rename this file to "query-watchman" and set
+# 'git config core.fsmonitor .git/hooks/query-watchman'
+#
+my ($version, $last_update_token) = @ARGV;
+
+# Uncomment for debugging
+# print STDERR "$0 $version $last_update_token\n";
+
+# Check the hook interface version
+if ($version ne 2) {
+	die "Unsupported query-fsmonitor hook version '$version'.\n" .
+	    "Falling back to scanning...\n";
+}
+
+my $git_work_tree = get_working_dir();
+
+my $retry = 1;
+
+my $json_pkg;
+eval {
+	require JSON::XS;
+	$json_pkg = "JSON::XS";
+	1;
+} or do {
+	require JSON::PP;
+	$json_pkg = "JSON::PP";
+};
+
+launch_watchman();
+
+sub launch_watchman {
+	my $o = watchman_query();
+	if (is_work_tree_watched($o)) {
+		output_result($o->{clock}, @{$o->{files}});
+	}
+}
+
+sub output_result {
+	my ($clockid, @files) = @_;
+
+	# Uncomment for debugging watchman output
+	# open (my $fh, ">", ".git/watchman-output.out");
+	# binmode $fh, ":utf8";
+	# print $fh "$clockid\n@files\n";
+	# close $fh;
+
+	binmode STDOUT, ":utf8";
+	print $clockid;
+	print "\0";
+	local $, = "\0";
+	print @files;
+}
+
+sub watchman_clock {
+	my $response = qx/watchman clock "$git_work_tree"/;
+	die "Failed to get clock id on '$git_work_tree'.\n" .
+		"Falling back to scanning...\n" if $? != 0;
+
+	return $json_pkg->new->utf8->decode($response);
+}
+
+sub watchman_query {
+	my $pid = open2(\*CHLD_OUT, \*CHLD_IN, 'watchman -j --no-pretty')
+	or die "open2() failed: $!\n" .
+	"Falling back to scanning...\n";
+
+	# In the query expression below we're asking for names of files that
+	# changed since $last_update_token but not from the .git folder.
+	#
+	# To accomplish this, we're using the "since" generator to use the
+	# recency index to select candidate nodes and "fields" to limit the
+	# output to file names only. Then we're using the "expression" term to
+	# further constrain the results.
+	my $last_update_line = "";
+	if (substr($last_update_token, 0, 1) eq "c") {
+		$last_update_token = "\"$last_update_token\"";
+		$last_update_line = qq[\n"since": $last_update_token,];
+	}
+	my $query = <<"	END";
+		["query", "$git_work_tree", {$last_update_line
+			"fields": ["name"],
+			"expression": ["not", ["dirname", ".git"]]
+		}]
+	END
+
+	# Uncomment for debugging the watchman query
+	# open (my $fh, ">", ".git/watchman-query.json");
+	# print $fh $query;
+	# close $fh;
+
+	print CHLD_IN $query;
+	close CHLD_IN;
+	my $response = do {local $/; <CHLD_OUT>};
+
+	# Uncomment for debugging the watch response
+	# open ($fh, ">", ".git/watchman-response.json");
+	# print $fh $response;
+	# close $fh;
+
+	die "Watchman: command returned no output.\n" .
+	"Falling back to scanning...\n" if $response eq "";
+	die "Watchman: command returned invalid output: $response\n" .
+	"Falling back to scanning...\n" unless $response =~ /^\{/;
+
+	return $json_pkg->new->utf8->decode($response);
+}
+
+sub is_work_tree_watched {
+	my ($output) = @_;
+	my $error = $output->{error};
+	if ($retry > 0 and $error and $error =~ m/unable to resolve root .* directory (.*) is not watched/) {
+		$retry--;
+		my $response = qx/watchman watch "$git_work_tree"/;
+		die "Failed to make watchman watch '$git_work_tree'.\n" .
+		    "Falling back to scanning...\n" if $? != 0;
+		$output = $json_pkg->new->utf8->decode($response);
+		$error = $output->{error};
+		die "Watchman: $error.\n" .
+		"Falling back to scanning...\n" if $error;
+
+		# Uncomment for debugging watchman output
+		# open (my $fh, ">", ".git/watchman-output.out");
+		# close $fh;
+
+		# Watchman will always return all files on the first query so
+		# return the fast "everything is dirty" flag to git and do the
+		# Watchman query just to get it over with now so we won't pay
+		# the cost in git to look up each individual file.
+		my $o = watchman_clock();
+		$error = $output->{error};
+
+		die "Watchman: $error.\n" .
+		"Falling back to scanning...\n" if $error;
+
+		output_result($o->{clock}, ("/"));
+		$last_update_token = $o->{clock};
+
+		eval { launch_watchman() };
+		return 0;
+	}
+
+	die "Watchman: $error.\n" .
+	"Falling back to scanning...\n" if $error;
+
+	return 1;
+}
+
+sub get_working_dir {
+	my $working_dir;
+	if ($^O =~ 'msys' || $^O =~ 'cygwin') {
+		$working_dir = Win32::GetCwd();
+		$working_dir =~ tr/\\/\//;
+	} else {
+		require Cwd;
+		$working_dir = Cwd::cwd();
+	}
+
+	return $working_dir;
+}
+</file>
+
+<file path="frontend/.git/hooks/post-update.sample">
+#!/bin/sh
+#
+# An example hook script to prepare a packed repository for use over
+# dumb transports.
+#
+# To enable this hook, rename this file to "post-update".
+
+exec git update-server-info
+</file>
+
+<file path="frontend/.git/hooks/pre-applypatch.sample">
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed
+# by applypatch from an e-mail message.
+#
+# The hook should exit with non-zero status after issuing an
+# appropriate message if it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-applypatch".
+
+. git-sh-setup
+precommit="$(git rev-parse --git-path hooks/pre-commit)"
+test -x "$precommit" && exec "$precommit" ${1+"$@"}
+:
+</file>
+
+<file path="frontend/.git/hooks/pre-commit.sample">
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-commit".
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=$(git hash-object -t tree /dev/null)
+fi
+
+# If you want to allow non-ASCII filenames set this variable to true.
+allownonascii=$(git config --type=bool hooks.allownonascii)
+
+# Redirect output to stderr.
+exec 1>&2
+
+# Cross platform projects tend to avoid non-ASCII filenames; prevent
+# them from being added to the repository. We exploit the fact that the
+# printable range starts at the space character and ends with tilde.
+if [ "$allownonascii" != "true" ] &&
+	# Note that the use of brackets around a tr range is ok here, (it's
+	# even required, for portability to Solaris 10's /usr/bin/tr), since
+	# the square bracket bytes happen to fall in the designated range.
+	test $(git diff-index --cached --name-only --diff-filter=A -z $against |
+	  LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
+then
+	cat <<\EOF
+Error: Attempt to add a non-ASCII file name.
+
+This can cause problems if you want to work with people on other platforms.
+
+To be portable it is advisable to rename the file.
+
+If you know what you are doing you can disable this check using:
+
+  git config hooks.allownonascii true
+EOF
+	exit 1
+fi
+
+# If there are whitespace errors, print the offending file names and fail.
+exec git diff-index --check --cached $against --
+</file>
+
+<file path="frontend/.git/hooks/pre-merge-commit.sample">
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git merge" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message to
+# stderr if it wants to stop the merge commit.
+#
+# To enable this hook, rename this file to "pre-merge-commit".
+
+. git-sh-setup
+test -x "$GIT_DIR/hooks/pre-commit" &&
+        exec "$GIT_DIR/hooks/pre-commit"
+:
+</file>
+
+<file path="frontend/.git/hooks/pre-push.sample">
+#!/bin/sh
+
+# An example hook script to verify what is about to be pushed.  Called by "git
+# push" after it has checked the remote status, but before anything has been
+# pushed.  If this script exits with a non-zero status nothing will be pushed.
+#
+# This hook is called with the following parameters:
+#
+# $1 -- Name of the remote to which the push is being done
+# $2 -- URL to which the push is being done
+#
+# If pushing without using a named remote those arguments will be equal.
+#
+# Information about the commits which are being pushed is supplied as lines to
+# the standard input in the form:
+#
+#   <local ref> <local oid> <remote ref> <remote oid>
+#
+# This sample shows how to prevent push of commits where the log message starts
+# with "WIP" (work in progress).
+
+remote="$1"
+url="$2"
+
+zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')
+
+while read local_ref local_oid remote_ref remote_oid
+do
+	if test "$local_oid" = "$zero"
+	then
+		# Handle delete
+		:
+	else
+		if test "$remote_oid" = "$zero"
+		then
+			# New branch, examine all commits
+			range="$local_oid"
+		else
+			# Update to existing branch, examine new commits
+			range="$remote_oid..$local_oid"
+		fi
+
+		# Check for WIP commit
+		commit=$(git rev-list -n 1 --grep '^WIP' "$range")
+		if test -n "$commit"
+		then
+			echo >&2 "Found WIP commit in $local_ref, not pushing"
+			exit 1
+		fi
+	fi
+done
+
+exit 0
+</file>
+
+<file path="frontend/.git/hooks/pre-rebase.sample">
+#!/bin/sh
+#
+# Copyright (c) 2006, 2008 Junio C Hamano
+#
+# The "pre-rebase" hook is run just before "git rebase" starts doing
+# its job, and can prevent the command from running by exiting with
+# non-zero status.
+#
+# The hook is called with the following parameters:
+#
+# $1 -- the upstream the series was forked from.
+# $2 -- the branch being rebased (or empty when rebasing the current branch).
+#
+# This sample shows how to prevent topic branches that are already
+# merged to 'next' branch from getting rebased, because allowing it
+# would result in rebasing already published history.
+
+publish=next
+basebranch="$1"
+if test "$#" = 2
+then
+	topic="refs/heads/$2"
+else
+	topic=`git symbolic-ref HEAD` ||
+	exit 0 ;# we do not interrupt rebasing detached HEAD
+fi
+
+case "$topic" in
+refs/heads/??/*)
+	;;
+*)
+	exit 0 ;# we do not interrupt others.
+	;;
+esac
+
+# Now we are dealing with a topic branch being rebased
+# on top of master.  Is it OK to rebase it?
+
+# Does the topic really exist?
+git show-ref -q "$topic" || {
+	echo >&2 "No such branch $topic"
+	exit 1
+}
+
+# Is topic fully merged to master?
+not_in_master=`git rev-list --pretty=oneline ^master "$topic"`
+if test -z "$not_in_master"
+then
+	echo >&2 "$topic is fully merged to master; better remove it."
+	exit 1 ;# we could allow it, but there is no point.
+fi
+
+# Is topic ever merged to next?  If so you should not be rebasing it.
+only_next_1=`git rev-list ^master "^$topic" ${publish} | sort`
+only_next_2=`git rev-list ^master           ${publish} | sort`
+if test "$only_next_1" = "$only_next_2"
+then
+	not_in_topic=`git rev-list "^$topic" master`
+	if test -z "$not_in_topic"
+	then
+		echo >&2 "$topic is already up to date with master"
+		exit 1 ;# we could allow it, but there is no point.
+	else
+		exit 0
+	fi
+else
+	not_in_next=`git rev-list --pretty=oneline ^${publish} "$topic"`
+	/usr/bin/perl -e '
+		my $topic = $ARGV[0];
+		my $msg = "* $topic has commits already merged to public branch:\n";
+		my (%not_in_next) = map {
+			/^([0-9a-f]+) /;
+			($1 => 1);
+		} split(/\n/, $ARGV[1]);
+		for my $elem (map {
+				/^([0-9a-f]+) (.*)$/;
+				[$1 => $2];
+			} split(/\n/, $ARGV[2])) {
+			if (!exists $not_in_next{$elem->[0]}) {
+				if ($msg) {
+					print STDERR $msg;
+					undef $msg;
+				}
+				print STDERR " $elem->[1]\n";
+			}
+		}
+	' "$topic" "$not_in_next" "$not_in_master"
+	exit 1
+fi
+
+<<\DOC_END
+
+This sample hook safeguards topic branches that have been
+published from being rewound.
+
+The workflow assumed here is:
+
+ * Once a topic branch forks from "master", "master" is never
+   merged into it again (either directly or indirectly).
+
+ * Once a topic branch is fully cooked and merged into "master",
+   it is deleted.  If you need to build on top of it to correct
+   earlier mistakes, a new topic branch is created by forking at
+   the tip of the "master".  This is not strictly necessary, but
+   it makes it easier to keep your history simple.
+
+ * Whenever you need to test or publish your changes to topic
+   branches, merge them into "next" branch.
+
+The script, being an example, hardcodes the publish branch name
+to be "next", but it is trivial to make it configurable via
+$GIT_DIR/config mechanism.
+
+With this workflow, you would want to know:
+
+(1) ... if a topic branch has ever been merged to "next".  Young
+    topic branches can have stupid mistakes you would rather
+    clean up before publishing, and things that have not been
+    merged into other branches can be easily rebased without
+    affecting other people.  But once it is published, you would
+    not want to rewind it.
+
+(2) ... if a topic branch has been fully merged to "master".
+    Then you can delete it.  More importantly, you should not
+    build on top of it -- other people may already want to
+    change things related to the topic as patches against your
+    "master", so if you need further changes, it is better to
+    fork the topic (perhaps with the same name) afresh from the
+    tip of "master".
+
+Let's look at this example:
+
+		   o---o---o---o---o---o---o---o---o---o "next"
+		  /       /           /           /
+		 /   a---a---b A     /           /
+		/   /               /           /
+	       /   /   c---c---c---c B         /
+	      /   /   /             \         /
+	     /   /   /   b---b C     \       /
+	    /   /   /   /             \     /
+    ---o---o---o---o---o---o---o---o---o---o---o "master"
+
+
+A, B and C are topic branches.
+
+ * A has one fix since it was merged up to "next".
+
+ * B has finished.  It has been fully merged up to "master" and "next",
+   and is ready to be deleted.
+
+ * C has not merged to "next" at all.
+
+We would want to allow C to be rebased, refuse A, and encourage
+B to be deleted.
+
+To compute (1):
+
+	git rev-list ^master ^topic next
+	git rev-list ^master        next
+
+	if these match, topic has not merged in next at all.
+
+To compute (2):
+
+	git rev-list master..topic
+
+	if this is empty, it is fully merged to "master".
+
+DOC_END
+</file>
+
+<file path="frontend/.git/hooks/pre-receive.sample">
+#!/bin/sh
+#
+# An example hook script to make use of push options.
+# The example simply echoes all push options that start with 'echoback='
+# and rejects all pushes when the "reject" push option is used.
+#
+# To enable this hook, rename this file to "pre-receive".
+
+if test -n "$GIT_PUSH_OPTION_COUNT"
+then
+	i=0
+	while test "$i" -lt "$GIT_PUSH_OPTION_COUNT"
+	do
+		eval "value=\$GIT_PUSH_OPTION_$i"
+		case "$value" in
+		echoback=*)
+			echo "echo from the pre-receive-hook: ${value#*=}" >&2
+			;;
+		reject)
+			exit 1
+		esac
+		i=$((i + 1))
+	done
+fi
+</file>
+
+<file path="frontend/.git/hooks/prepare-commit-msg.sample">
+#!/bin/sh
+#
+# An example hook script to prepare the commit log message.
+# Called by "git commit" with the name of the file that has the
+# commit message, followed by the description of the commit
+# message's source.  The hook's purpose is to edit the commit
+# message file.  If the hook fails with a non-zero status,
+# the commit is aborted.
+#
+# To enable this hook, rename this file to "prepare-commit-msg".
+
+# This hook includes three examples. The first one removes the
+# "# Please enter the commit message..." help message.
+#
+# The second includes the output of "git diff --name-status -r"
+# into the message, just before the "git status" output.  It is
+# commented because it doesn't cope with --amend or with squashed
+# commits.
+#
+# The third example adds a Signed-off-by line to the message, that can
+# still be edited.  This is rarely a good idea.
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+/usr/bin/perl -i.bak -ne 'print unless(m/^. Please enter the commit message/..m/^#$/)' "$COMMIT_MSG_FILE"
+
+# case "$COMMIT_SOURCE,$SHA1" in
+#  ,|template,)
+#    /usr/bin/perl -i.bak -pe '
+#       print "\n" . `git diff --cached --name-status -r`
+# 	 if /^#/ && $first++ == 0' "$COMMIT_MSG_FILE" ;;
+#  *) ;;
+# esac
+
+# SOB=$(git var GIT_COMMITTER_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+# git interpret-trailers --in-place --trailer "$SOB" "$COMMIT_MSG_FILE"
+# if test -z "$COMMIT_SOURCE"
+# then
+#   /usr/bin/perl -i.bak -pe 'print "\n" if !$first_line++' "$COMMIT_MSG_FILE"
+# fi
+</file>
+
+<file path="frontend/.git/hooks/push-to-checkout.sample">
+#!/bin/sh
+
+# An example hook script to update a checked-out tree on a git push.
+#
+# This hook is invoked by git-receive-pack(1) when it reacts to git
+# push and updates reference(s) in its repository, and when the push
+# tries to update the branch that is currently checked out and the
+# receive.denyCurrentBranch configuration variable is set to
+# updateInstead.
+#
+# By default, such a push is refused if the working tree and the index
+# of the remote repository has any difference from the currently
+# checked out commit; when both the working tree and the index match
+# the current commit, they are updated to match the newly pushed tip
+# of the branch. This hook is to be used to override the default
+# behaviour; however the code below reimplements the default behaviour
+# as a starting point for convenient modification.
+#
+# The hook receives the commit with which the tip of the current
+# branch is going to be updated:
+commit=$1
+
+# It can exit with a non-zero status to refuse the push (when it does
+# so, it must not modify the index or the working tree).
+die () {
+	echo >&2 "$*"
+	exit 1
+}
+
+# Or it can make any necessary changes to the working tree and to the
+# index to bring them to the desired state when the tip of the current
+# branch is updated to the new commit, and exit with a zero status.
+#
+# For example, the hook can simply run git read-tree -u -m HEAD "$1"
+# in order to emulate git fetch that is run in the reverse direction
+# with git push, as the two-tree form of git read-tree -u -m is
+# essentially the same as git switch or git checkout that switches
+# branches while keeping the local changes in the working tree that do
+# not interfere with the difference between the branches.
+
+# The below is a more-or-less exact translation to shell of the C code
+# for the default behaviour for git's push-to-checkout hook defined in
+# the push_to_deploy() function in builtin/receive-pack.c.
+#
+# Note that the hook will be executed from the repository directory,
+# not from the working tree, so if you want to perform operations on
+# the working tree, you will have to adapt your code accordingly, e.g.
+# by adding "cd .." or using relative paths.
+
+if ! git update-index -q --ignore-submodules --refresh
+then
+	die "Up-to-date check failed"
+fi
+
+if ! git diff-files --quiet --ignore-submodules --
+then
+	die "Working directory has unstaged changes"
+fi
+
+# This is a rough translation of:
+#
+#   head_has_history() ? "HEAD" : EMPTY_TREE_SHA1_HEX
+if git cat-file -e HEAD 2>/dev/null
+then
+	head=HEAD
+else
+	head=$(git hash-object -t tree --stdin </dev/null)
+fi
+
+if ! git diff-index --quiet --cached --ignore-submodules $head --
+then
+	die "Working directory has staged changes"
+fi
+
+if ! git read-tree -u -m "$commit"
+then
+	die "Could not update working tree to new HEAD"
+fi
+</file>
+
+<file path="frontend/.git/hooks/sendemail-validate.sample">
+#!/bin/sh
+
+# An example hook script to validate a patch (and/or patch series) before
+# sending it via email.
+#
+# The hook should exit with non-zero status after issuing an appropriate
+# message if it wants to prevent the email(s) from being sent.
+#
+# To enable this hook, rename this file to "sendemail-validate".
+#
+# By default, it will only check that the patch(es) can be applied on top of
+# the default upstream branch without conflicts in a secondary worktree. After
+# validation (successful or not) of the last patch of a series, the worktree
+# will be deleted.
+#
+# The following config variables can be set to change the default remote and
+# remote ref that are used to apply the patches against:
+#
+#   sendemail.validateRemote (default: origin)
+#   sendemail.validateRemoteRef (default: HEAD)
+#
+# Replace the TODO placeholders with appropriate checks according to your
+# needs.
+
+validate_cover_letter () {
+	file="$1"
+	# TODO: Replace with appropriate checks (e.g. spell checking).
+	true
+}
+
+validate_patch () {
+	file="$1"
+	# Ensure that the patch applies without conflicts.
+	git am -3 "$file" || return
+	# TODO: Replace with appropriate checks for this patch
+	# (e.g. checkpatch.pl).
+	true
+}
+
+validate_series () {
+	# TODO: Replace with appropriate checks for the whole series
+	# (e.g. quick build, coding style checks, etc.).
+	true
+}
+
+# main -------------------------------------------------------------------------
+
+if test "$GIT_SENDEMAIL_FILE_COUNTER" = 1
+then
+	remote=$(git config --default origin --get sendemail.validateRemote) &&
+	ref=$(git config --default HEAD --get sendemail.validateRemoteRef) &&
+	worktree=$(mktemp --tmpdir -d sendemail-validate.XXXXXXX) &&
+	git worktree add -fd --checkout "$worktree" "refs/remotes/$remote/$ref" &&
+	git config --replace-all sendemail.validateWorktree "$worktree"
+else
+	worktree=$(git config --get sendemail.validateWorktree)
+fi || {
+	echo "sendemail-validate: error: failed to prepare worktree" >&2
+	exit 1
+}
+
+unset GIT_DIR GIT_WORK_TREE
+cd "$worktree" &&
+
+if grep -q "^diff --git " "$1"
+then
+	validate_patch "$1"
+else
+	validate_cover_letter "$1"
+fi &&
+
+if test "$GIT_SENDEMAIL_FILE_COUNTER" = "$GIT_SENDEMAIL_FILE_TOTAL"
+then
+	git config --unset-all sendemail.validateWorktree &&
+	trap 'git worktree remove -ff "$worktree"' EXIT &&
+	validate_series
+fi
+</file>
+
+<file path="frontend/.git/hooks/update.sample">
+#!/bin/sh
+#
+# An example hook script to block unannotated tags from entering.
+# Called by "git receive-pack" with arguments: refname sha1-old sha1-new
+#
+# To enable this hook, rename this file to "update".
+#
+# Config
+# ------
+# hooks.allowunannotated
+#   This boolean sets whether unannotated tags will be allowed into the
+#   repository.  By default they won't be.
+# hooks.allowdeletetag
+#   This boolean sets whether deleting tags will be allowed in the
+#   repository.  By default they won't be.
+# hooks.allowmodifytag
+#   This boolean sets whether a tag may be modified after creation. By default
+#   it won't be.
+# hooks.allowdeletebranch
+#   This boolean sets whether deleting branches will be allowed in the
+#   repository.  By default they won't be.
+# hooks.denycreatebranch
+#   This boolean sets whether remotely creating branches will be denied
+#   in the repository.  By default this is allowed.
+#
+
+# --- Command line
+refname="$1"
+oldrev="$2"
+newrev="$3"
+
+# --- Safety check
+if [ -z "$GIT_DIR" ]; then
+	echo "Don't run this script from the command line." >&2
+	echo " (if you want, you could supply GIT_DIR then run" >&2
+	echo "  $0 <ref> <oldrev> <newrev>)" >&2
+	exit 1
+fi
+
+if [ -z "$refname" -o -z "$oldrev" -o -z "$newrev" ]; then
+	echo "usage: $0 <ref> <oldrev> <newrev>" >&2
+	exit 1
+fi
+
+# --- Config
+allowunannotated=$(git config --type=bool hooks.allowunannotated)
+allowdeletebranch=$(git config --type=bool hooks.allowdeletebranch)
+denycreatebranch=$(git config --type=bool hooks.denycreatebranch)
+allowdeletetag=$(git config --type=bool hooks.allowdeletetag)
+allowmodifytag=$(git config --type=bool hooks.allowmodifytag)
+
+# check for no description
+projectdesc=$(sed -e '1q' "$GIT_DIR/description")
+case "$projectdesc" in
+"Unnamed repository"* | "")
+	echo "*** Project description file hasn't been set" >&2
+	exit 1
+	;;
+esac
+
+# --- Check types
+# if $newrev is 0000...0000, it's a commit to delete a ref.
+zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')
+if [ "$newrev" = "$zero" ]; then
+	newrev_type=delete
+else
+	newrev_type=$(git cat-file -t $newrev)
+fi
+
+case "$refname","$newrev_type" in
+	refs/tags/*,commit)
+		# un-annotated tag
+		short_refname=${refname##refs/tags/}
+		if [ "$allowunannotated" != "true" ]; then
+			echo "*** The un-annotated tag, $short_refname, is not allowed in this repository" >&2
+			echo "*** Use 'git tag [ -a | -s ]' for tags you want to propagate." >&2
+			exit 1
+		fi
+		;;
+	refs/tags/*,delete)
+		# delete tag
+		if [ "$allowdeletetag" != "true" ]; then
+			echo "*** Deleting a tag is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	refs/tags/*,tag)
+		# annotated tag
+		if [ "$allowmodifytag" != "true" ] && git rev-parse $refname > /dev/null 2>&1
+		then
+			echo "*** Tag '$refname' already exists." >&2
+			echo "*** Modifying a tag is not allowed in this repository." >&2
+			exit 1
+		fi
+		;;
+	refs/heads/*,commit)
+		# branch
+		if [ "$oldrev" = "$zero" -a "$denycreatebranch" = "true" ]; then
+			echo "*** Creating a branch is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	refs/heads/*,delete)
+		# delete branch
+		if [ "$allowdeletebranch" != "true" ]; then
+			echo "*** Deleting a branch is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	refs/remotes/*,commit)
+		# tracking branch
+		;;
+	refs/remotes/*,delete)
+		# delete tracking branch
+		if [ "$allowdeletebranch" != "true" ]; then
+			echo "*** Deleting a tracking branch is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	*)
+		# Anything else (is there anything else?)
+		echo "*** Update hook: unknown type of update to ref $refname of type $newrev_type" >&2
+		exit 1
+		;;
+esac
+
+# --- Finished
+exit 0
+</file>
+
+<file path="frontend/.git/info/exclude">
+# git ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+# For a project mostly in C, the following would be a good set of
+# exclude patterns (uncomment them if you want to use them):
+# *.[oa]
+# *~
+</file>
+
+<file path="frontend/.git/logs/HEAD">
+0000000000000000000000000000000000000000 a2e6914435a5622a86ee11901f37b04e3466dc66 Anjana <anjanaks2202@gmail.com> 1783685120 +0530	commit (initial): Initial commit from Create Next App
+</file>
+
+<file path="frontend/.git/logs/refs/heads/master">
+0000000000000000000000000000000000000000 a2e6914435a5622a86ee11901f37b04e3466dc66 Anjana <anjanaks2202@gmail.com> 1783685120 +0530	commit (initial): Initial commit from Create Next App
+</file>
+
+<file path="frontend/.git/refs/heads/master">
+a2e6914435a5622a86ee11901f37b04e3466dc66
+</file>
+
+<file path="frontend/.gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="frontend/Dockerfile">
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
+</file>
+
+<file path="frontend/next.config.mjs">
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+export default nextConfig;
+</file>
+
+<file path="frontend/package.json">
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/leaflet": "^1.9.21",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^1.24.0",
+    "next": "14.2.35",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-leaflet": "^4.2.1",
+    "recharts": "^3.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="frontend/postcss.config.mjs">
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    tailwindcss: {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="frontend/README.md">
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</file>
+
+<file path="frontend/src/app/globals.css">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020a10;
+  --foreground: #f3f4f6;
+  --surface: #05121b;
+  --accent-primary: #38BDF8;
+  --accent-secondary: #818CF8;
+  --border: #1F2937;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.025em;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism style */
+.glass-panel {
+  background: rgba(11, 17, 23, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+/* Active cyan glow */
+.cyan-glow {
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+  border-color: var(--accent-primary) !important;
+}
+
+.cyan-text-glow {
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+/* Custom scrollbar for terminal/fintech style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Leaflet dark theme override */
+.leaflet-container {
+  background: #030712 !important;
+  width: 100%;
+  height: 100%;
+}
+.leaflet-bar a {
+  background-color: #0B1117 !important;
+  color: #38BDF8 !important;
+  border: 1px solid #1F2937 !important;
+}
+</file>
+
+<file path="frontend/src/app/layout.tsx">
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
+
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="frontend/src/app/page.tsx">
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { 
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, 
+  AreaChart, Area
+} from 'recharts';
+import { 
+  ShieldCheck, HelpCircle, Download, RefreshCw, Layers, 
+  Activity, Search, AlertTriangle, Info, X, MapPin, ListFilter
+} from 'lucide-react';
+
+// Dynamically import Leaflet Map to prevent Next.js SSR error
+const MapComponent = dynamic(
+  () => import('../components/MapComponent'),
+  { ssr: false, loading: () => <div className="w-full h-full flex items-center justify-center bg-surface border border-border text-gray-400">Loading Map Engine...</div> }
+);
+
+// Fallback Mock Data as required by Guardrails
+const fallbackProjects = [
+  {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [-62.2159, -3.4653] },
+    "properties": {
+      "id": "VCS-984",
+      "title": "Amazon Rainforest Conservation Project",
+      "registry": "Verra Registry",
+      "methodology": "VM0007 REDD+ Methodology",
+      "category": "Governance & Trust",
+      "credits_issued": 1250000,
+      "credits_retired": 850000,
+      "status": "Active",
+      "region": "South America",
+      "country": "Brazil",
+      "price_per_credit": 15.50,
+      "price_vs_regional_pct": 21.1,
+      "retirement_ratio_pct": 68.0,
+      "trust_score": 87.5,
+      "verifier": "SCS Global Services",
+      "last_updated": "2026-06-15"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [78.9629, 20.5937] },
+    "properties": {
+      "id": "GS-4021",
+      "title": "Clean Wind Energy Grid Integration",
+      "registry": "Gold Standard Registry",
+      "methodology": "ACM0002 Grid-connected Renewables",
+      "category": "Governance & Trust",
+      "credits_issued": 450000,
+      "credits_retired": 410000,
+      "status": "Active",
+      "region": "Asia",
+      "country": "India",
+      "price_per_credit": 9.20,
+      "price_vs_regional_pct": 8.2,
+      "retirement_ratio_pct": 91.1,
+      "trust_score": 93.7,
+      "verifier": "TÜV NORD",
+      "last_updated": "2026-05-10"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [113.9213, -0.7893] },
+    "properties": {
+      "id": "VCS-1123",
+      "title": "Southern Peatland Restoration and Protection",
+      "registry": "Verra Registry",
+      "methodology": "VM0034 Peatland Rewetting",
+      "category": "Governance & Trust",
+      "credits_issued": 800000,
+      "credits_retired": 320000,
+      "status": "Active",
+      "region": "Southeast Asia",
+      "country": "Indonesia",
+      "price_per_credit": 18.00,
+      "price_vs_regional_pct": 24.1,
+      "retirement_ratio_pct": 40.0,
+      "trust_score": 79.0,
+      "verifier": "Vesta Verifiers",
+      "last_updated": "2026-07-01"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [36.8219, -1.2921] },
+    "properties": {
+      "id": "GS-5820",
+      "title": "Community Boreholes and Water Purification",
+      "registry": "Gold Standard Registry",
+      "methodology": "GS-TPDDTEC Safe Water Supply",
+      "category": "Governance & Trust",
+      "credits_issued": 300000,
+      "credits_retired": 285000,
+      "status": "Active",
+      "region": "Africa",
+      "country": "Kenya",
+      "price_per_credit": 11.50,
+      "price_vs_regional_pct": 12.7,
+      "retirement_ratio_pct": 95.0,
+      "trust_score": 94.3,
+      "verifier": "Gold Standard Auditor",
+      "last_updated": "2026-06-28"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [-86.2419, 15.2000] },
+    "properties": {
+      "id": "VCS-2451",
+      "title": "Mangrove Blue Carbon Coastal Protection",
+      "registry": "Verra Registry",
+      "methodology": "VM0033 Tidal Wetland Restoration",
+      "category": "Governance & Trust",
+      "credits_issued": 620000,
+      "credits_retired": 150000,
+      "status": "Under Review",
+      "region": "Central America",
+      "country": "Honduras",
+      "price_per_credit": 22.00,
+      "price_vs_regional_pct": 33.3,
+      "retirement_ratio_pct": 24.2,
+      "trust_score": 67.2,
+      "verifier": "SCS Global Services",
+      "last_updated": "2026-04-18"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": { "type": "Point", "coordinates": [29.8739, -1.9403] },
+    "properties": {
+      "id": "GS-3104",
+      "title": "Improved Biomass Cookstoves for Rural Households",
+      "registry": "Gold Standard Registry",
+      "methodology": "GS-COOKSTOVE Improved Thermal",
+      "category": "Governance & Trust",
+      "credits_issued": 950000,
+      "credits_retired": 910000,
+      "status": "Active",
+      "region": "Africa",
+      "country": "Rwanda",
+      "price_per_credit": 13.00,
+      "price_vs_regional_pct": 27.5,
+      "retirement_ratio_pct": 95.8,
+      "trust_score": 94.4,
+      "verifier": "Carbon Verification Corp",
+      "last_updated": "2026-07-05"
+    }
+  }
+];
+
+const fallbackStats = {
+  total_issued: 4350000,
+  total_retired: 3180000,
+  avg_retirement_rate: 73.1,
+  avg_trust_score: 86.0,
+  total_projects: 6,
+  active_methodologies: 6
+};
+
+export default function Dashboard() {
+  const [projects, setProjects] = useState<any[]>(fallbackProjects);
+  const [stats, setStats] = useState<any>(fallbackStats);
+  const [registryFilter, setRegistryFilter] = useState<string>('All');
+  const [statusFilter, setStatusFilter] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>('VCS-984');
+  const [isLive, setIsLive] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  
+  // Dynamic slide-over control
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+  
+  // Signature Popover
+  const [infoOpen, setInfoOpen] = useState<boolean>(false);
+  
+  // Floating panes toggle
+  const [showLedger, setShowLedger] = useState<boolean>(true);
+  const [showAnalytics, setShowAnalytics] = useState<boolean>(false);
+
+  const fetchLiveMetrics = async () => {
+    setLoading(true);
+    setErrorMsg(null);
+    try {
+      const projectsRes = await fetch(`http://127.0.0.1:8000/api/projects?registry=${registryFilter}&status=${statusFilter}`);
+      if (!projectsRes.ok) throw new Error('Live API projects response failed');
+      const projectsData = await projectsRes.json();
+
+      const statsRes = await fetch('http://127.0.0.1:8000/api/stats');
+      if (!statsRes.ok) throw new Error('Live API stats response failed');
+      const statsData = await statsRes.json();
+
+      setProjects(projectsData.features);
+      setStats(statsData);
+      setIsLive(true);
+    } catch (err: any) {
+      console.warn("Live API connection failed. Switching to local mock fallback.", err);
+      // Fallback logic
+      let filtered = [...fallbackProjects];
+      if (registryFilter !== 'All') {
+        filtered = filtered.filter(p => p.properties.registry === registryFilter);
+      }
+      if (statusFilter !== 'All') {
+        filtered = filtered.filter(p => p.properties.status === statusFilter);
+      }
+      setProjects(filtered);
+      setIsLive(false);
+      setErrorMsg("Using offline mock fallback data. Backend API server not reachable.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchLiveMetrics();
+  }, [registryFilter, statusFilter]);
+
+  const handleDownload = () => {
+    if (isLive) {
+      window.open('http://127.0.0.1:8000/api/download');
+    } else {
+      // Simulate download using data URI
+      const headers = "id,title,registry,methodology,category,credits_issued,credits_retired,status,region,country,price_per_credit,price_vs_regional_pct,retirement_ratio_pct,trust_score,verifier,last_updated\n";
+      const rows = fallbackProjects.map(p => {
+        const prop = p.properties;
+        return `"${prop.id}","${prop.title}","${prop.registry}","${prop.methodology}","${prop.category}",${prop.credits_issued},${prop.credits_retired},"${prop.status}","${prop.region}","${prop.country}",${prop.price_per_credit},${prop.price_vs_regional_pct},${prop.retirement_ratio_pct},${prop.trust_score},"${prop.verifier}","${prop.last_updated}"`;
+      }).join('\n');
+      
+      const blob = new Blob([headers + rows], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'carbon_credit_registry_mock_data.csv');
+      a.click();
+    }
+  };
+
+  // Filter projects by search query
+  const displayedProjects = projects.filter(p => {
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      p.properties.title.toLowerCase().includes(searchLower) ||
+      p.properties.id.toLowerCase().includes(searchLower) ||
+      p.properties.methodology.toLowerCase().includes(searchLower) ||
+      p.properties.country.toLowerCase().includes(searchLower)
+    );
+  });
+
+  const selectedProject = projects.find(p => p.properties.id === selectedProjectId) || null;
+
+  // Chart data preparing
+  const chartData = projects.map(p => ({
+    name: p.properties.id,
+    issued: p.properties.credits_issued / 1000, // in thousands
+    retired: p.properties.credits_retired / 1000,
+    price: p.properties.price_per_credit,
+    trust: p.properties.trust_score
+  }));
+
+  const selectProject = (id: string) => {
+    setSelectedProjectId(id);
+    setSidebarOpen(true);
+  };
+
+  return (
+    <div className="relative w-screen h-screen overflow-hidden bg-background text-foreground flex flex-col antialiased">
+      
+      {/* 100% Stage (Full Screen Map Backdrop) */}
+      <div className="absolute inset-0 z-0 w-full h-full">
+        <MapComponent 
+          projects={projects}
+          selectedProjectId={selectedProjectId}
+          onSelectProject={selectProject}
+        />
+      </div>
+
+      {/* Pillar III: Transparent Minimalist Header */}
+      <header className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background/90 to-transparent px-6 flex items-center justify-between z-30 pointer-events-none">
+        <div className="flex items-center space-x-3 pointer-events-auto">
+          <Layers className="text-accent-primary w-5 h-5 animate-pulse" />
+          <div>
+            <h1 className="text-md font-bold tracking-tight text-white flex items-center font-sans">
+              Carbon Credit Registry Explorer - Infocreon Internship
+            </h1>
+            <p className="text-sm text-white uppercase tracking-widest font-mono">GOVERNANCE & TRUST</p>
+          </div>
+        </div>
+
+        {/* Action Controls & Info Signature Trigger */}
+        <div className="flex items-center space-x-3 pointer-events-auto">
+          {errorMsg && (
+            <div className="hidden md:flex items-center space-x-1.5 text-amber-500 bg-background/80 backdrop-blur-md px-2.5 py-1 rounded text-[10px] border border-amber-500/20">
+              <AlertTriangle className="w-3 h-3" />
+              <span>Offline Fallback</span>
+            </div>
+          )}
+          <button 
+            onClick={fetchLiveMetrics} 
+            disabled={loading}
+            className="p-1.5 rounded hover:bg-border/60 text-accent-primary border border-border/40 bg-surface/80 backdrop-blur-md transition-all active:scale-95"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+          </button>
+          
+          {/* Information Signature Popover Button */}
+          <div className="relative">
+            <button 
+              onClick={() => setInfoOpen(!infoOpen)}
+              className="p-1.5 rounded hover:bg-accent-primary hover:text-background text-accent-primary border border-accent-primary/40 bg-surface/80 backdrop-blur-md transition-all active:scale-95 shadow-cyan-glow"
+            >
+              <Info className="w-3.5 h-3.5" />
+            </button>
+
+            {/* Metadata Popover Modal */}
+            {infoOpen && (
+              <div className="absolute right-0 mt-2.5 w-64 bg-surface/95 backdrop-blur-md border border-border p-4 rounded-lg shadow-2xl z-50 pointer-events-auto">
+                <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-white">System Architecture</h4>
+                  <button onClick={() => setInfoOpen(false)} className="text-gray-400 hover:text-white">
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Architect:</span>
+                    <span className="text-accent-primary font-semibold font-mono">Anjana KS</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Batch:</span>
+                    <span className="text-white">Batch 4 Interns</span>
+                  </div>
+                  <div className="flex flex-col gap-1 border-t border-border/30 pt-2 mt-2">
+                    <span className="text-[10px] text-gray-400 uppercase font-mono">Stack Components</span>
+                    <span className="text-white font-mono text-[10px]">Next.js, FastAPI, Tailwind CSS, Leaflet, Recharts</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* Floating Control Overlays (Left/Bottom layout) */}
+      <div className="absolute left-6 top-20 z-20 flex flex-col space-y-4 max-w-sm sm:max-w-md pointer-events-none">
+        
+        {/* Toggle Controls to show/hide Overlay Modules */}
+        <div className="flex space-x-2 pointer-events-auto">
+          <button 
+            onClick={() => setShowLedger(!showLedger)}
+            className={`px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all bg-surface/90 backdrop-blur-md ${
+              showLedger ? 'border-accent-primary text-accent-primary' : 'border-border text-gray-400'
+            }`}
+          >
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Ledger Feed</span>
+          </button>
+          <button 
+            onClick={() => setShowAnalytics(!showAnalytics)}
+            className={`px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all bg-surface/90 backdrop-blur-md ${
+              showAnalytics ? 'border-accent-secondary text-accent-secondary' : 'border-border text-gray-400'
+            }`}
+          >
+            <Activity className="w-3.5 h-3.5" />
+            <span>Analytics</span>
+          </button>
+        </div>
+
+        {/* Floating Ledger Feed & Telemetry Filters Panel */}
+        {showLedger && (
+          <div className="glass-panel p-4 rounded-lg shadow-xl w-[90vw] sm:w-[420px] pointer-events-auto transition-all animate-in fade-in slide-in-from-left duration-200">
+            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-white">Registry Ledger</h3>
+                <p className="text-[9px] text-gray-400 font-mono">Real-time asset validation</p>
+              </div>
+              <div className="relative w-36">
+                <Search className="absolute left-2 top-2 h-3 w-3 text-gray-400" />
+                <input 
+                  type="text" 
+                  placeholder="Search ID..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-6 pr-2 py-1 text-[10px] bg-background border border-border rounded focus:outline-none focus:border-accent-primary text-white font-mono"
+                />
+              </div>
+            </div>
+
+            {/* Quick Filters */}
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              <div>
+                <select 
+                  value={registryFilter}
+                  onChange={(e) => setRegistryFilter(e.target.value)}
+                  className="w-full bg-background border border-border text-[9px] rounded p-1.5 text-white focus:border-accent-primary focus:outline-none font-mono"
+                >
+                  <option value="All">All Registries</option>
+                  <option value="Verra Registry">Verra Registry</option>
+                  <option value="Gold Standard Registry">Gold Standard Registry</option>
+                </select>
+              </div>
+              <div>
+                <select 
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="w-full bg-background border border-border text-[9px] rounded p-1.5 text-white focus:border-accent-primary focus:outline-none font-mono"
+                >
+                  <option value="All">All Statuses</option>
+                  <option value="Active">Active</option>
+                  <option value="Under Review">Under Review</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Scrollable Mini Table */}
+            <div className="max-h-[180px] overflow-y-auto border border-border/60 rounded">
+              <table className="w-full text-left text-[10px]">
+                <thead>
+                  <tr className="border-b border-border bg-background/50 text-gray-400 font-mono sticky top-0">
+                    <th className="p-2">ID</th>
+                    <th className="p-2">Project</th>
+                    <th className="p-2 text-right">Price</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/40">
+                  {displayedProjects.map(p => (
+                    <tr 
+                      key={p.properties.id}
+                      onClick={() => selectProject(p.properties.id)}
+                      className={`hover:bg-border/30 cursor-pointer transition-colors ${selectedProjectId === p.properties.id ? 'bg-accent-primary/10 border-l border-accent-primary' : ''}`}
+                    >
+                      <td className="p-2 font-mono text-accent-primary font-bold">{p.properties.id}</td>
+                      <td className="p-2 font-medium text-white truncate max-w-[180px]">{p.properties.title}</td>
+                      <td className="p-2 text-right font-mono text-white">${p.properties.price_per_credit.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Floating Analytics Graph Pane */}
+        {showAnalytics && (
+          <div className="glass-panel p-4 rounded-lg shadow-xl w-[90vw] sm:w-[420px] pointer-events-auto transition-all animate-in fade-in slide-in-from-left duration-200">
+            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-white">Credit flow metrics (kCO2e)</h3>
+              <Activity className="w-3.5 h-3.5 text-accent-secondary" />
+            </div>
+            <div className="h-[140px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
+                  <XAxis dataKey="name" stroke="#6b7280" fontSize={8} tickLine={false} />
+                  <YAxis stroke="#6b7280" fontSize={8} tickLine={false} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#05121b', borderColor: '#1F2937', fontSize: 10 }}
+                    labelStyle={{ color: '#fff', fontWeight: 'bold' }}
+                  />
+                  <Bar dataKey="issued" name="Issued (k)" fill="#818CF8" radius={[1, 1, 0, 0]} />
+                  <Bar dataKey="retired" name="Retired (k)" fill="#38BDF8" radius={[1, 1, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Pillar II: Slide-over Intelligence Panel */}
+      <div className={`fixed top-0 right-0 bottom-0 w-full sm:w-[360px] bg-surface/95 backdrop-blur-md border-l border-border z-40 transition-transform duration-300 transform pointer-events-auto flex flex-col shadow-2xl ${
+        sidebarOpen && selectedProject ? 'translate-x-0' : 'translate-x-full'
+      }`}>
+        
+        {/* Slide-over header / controls */}
+        <div className="p-4 border-b border-border flex items-center justify-between bg-background/50">
+          <div className="flex items-center space-x-1.5 text-accent-primary">
+            <ShieldCheck className="w-4 h-4" />
+            <span className="text-[10px] font-bold uppercase tracking-widest font-mono">Asset Intelligence</span>
+          </div>
+          <button 
+            onClick={() => setSidebarOpen(false)}
+            className="p-1 rounded hover:bg-border/60 text-gray-400 hover:text-white transition-all"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Scrollable details content */}
+        {selectedProject && (
+          <div className="flex-1 overflow-y-auto p-5 space-y-5">
+            
+            {/* Project Title Header */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono text-accent-primary font-bold">{selectedProject.properties.id}</span>
+                <span className="text-[8px] bg-border px-1.5 py-0.5 rounded text-gray-400 uppercase font-mono">{selectedProject.properties.registry}</span>
+              </div>
+              <h2 className="text-md font-bold text-white leading-snug">{selectedProject.properties.title}</h2>
+            </div>
+
+            {/* A: Metric stats */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-background/40 p-2.5 border border-border/40 rounded">
+                <span className="text-[8px] text-gray-400 block uppercase font-mono">Issued Credits</span>
+                <span className="text-sm font-bold text-white font-mono">{selectedProject.properties.credits_issued.toLocaleString('en-US')}</span>
+              </div>
+              <div className="bg-background/40 p-2.5 border border-border/40 rounded">
+                <span className="text-[8px] text-gray-400 block uppercase font-mono">Retirement Ratio</span>
+                <span className="text-sm font-bold text-accent-primary font-mono">{selectedProject.properties.retirement_ratio_pct}%</span>
+              </div>
+            </div>
+
+            {/* B: Narrative Section: Why This Matters */}
+            <div className="bg-accent-primary/5 border border-accent-primary/10 p-3.5 rounded-lg space-y-1.5">
+              <div className="flex items-center space-x-1.5 text-accent-primary">
+                <HelpCircle className="w-3.5 h-3.5" />
+                <h4 className="text-[10px] font-bold uppercase tracking-wider font-mono">Why This Matters</h4>
+              </div>
+              <p className="text-[11px] text-gray-300 leading-relaxed">
+                A useful governance-rail episode where markets meet reporting. Ensuring transparency and tracking offset permanence guarantees sovereign credibility.
+              </p>
+            </div>
+
+            {/* C: Narrative Section: Who Controls */}
+            <div className="bg-accent-secondary/5 border border-accent-secondary/10 p-3.5 rounded-lg space-y-1.5">
+              <div className="flex items-center space-x-1.5 text-accent-secondary">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <h4 className="text-[10px] font-bold uppercase tracking-wider font-mono">Who Controls the Rail</h4>
+              </div>
+              <p className="text-[11px] text-gray-300 leading-relaxed font-sans">
+                The power dynamics of a carbon credit registry explorer lie in its ability to democratize data access, shifting influence away from opaque, centralized registries and project developers by empowering buyers, watchdogs, and the public to independently verify, audit, and expose double-counting or greenwashing in environmental markets.
+              </p>
+            </div>
+
+            {/* Project parameters table */}
+            <div className="bg-background/30 border border-border/60 rounded p-3.5 space-y-2">
+              <h4 className="text-[10px] font-bold uppercase tracking-wider text-white font-mono">Audit Parameters</h4>
+              
+              <div className="space-y-1.5 text-[10px] font-mono">
+                <div className="flex justify-between border-b border-border/40 pb-1 text-gray-400">
+                  <span>Methodology</span>
+                  <span className="text-white truncate max-w-[130px]">{selectedProject.properties.methodology}</span>
+                </div>
+                <div className="flex justify-between border-b border-border/40 pb-1 text-gray-400">
+                  <span>Price / Credit</span>
+                  <span className="text-accent-primary font-bold">${selectedProject.properties.price_per_credit.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between border-b border-border/40 pb-1 text-gray-400">
+                  <span>vs Regional Avg</span>
+                  <span className={`font-semibold ${selectedProject.properties.price_vs_regional_pct >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                    {selectedProject.properties.price_vs_regional_pct >= 0 ? '+' : ''}{selectedProject.properties.price_vs_regional_pct}%
+                  </span>
+                </div>
+                <div className="flex justify-between border-b border-border/40 pb-1 text-gray-400">
+                  <span>Trust Score</span>
+                  <span className="text-white font-bold">{selectedProject.properties.trust_score}</span>
+                </div>
+                <div className="flex justify-between text-gray-400">
+                  <span>Auditor</span>
+                  <span className="text-white">{selectedProject.properties.verifier}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        )}
+
+        {/* Slide-over Footer Download */}
+        <div className="p-4 border-t border-border bg-background/50">
+          <button 
+            onClick={handleDownload}
+            className="w-full flex items-center justify-center space-x-2 py-2 bg-accent-primary text-background font-bold text-xs uppercase tracking-wider rounded hover:bg-white hover:shadow-cyan-glow transition-all active:scale-[0.98]"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Sample Data</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+</file>
+
+<file path="frontend/src/components/MapComponent.tsx">
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+// Fix Leaflet icon issue in Next.js
+const setupLeafletIcon = () => {
+  // @ts-ignore
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  });
+};
+
+interface ProjectFeature {
+  type: string;
+  geometry: {
+    type: string;
+    coordinates: [number, number];
+  };
+  properties: {
+    id: string;
+    title: string;
+    registry: string;
+    methodology: string;
+    category: string;
+    credits_issued: number;
+    credits_retired: number;
+    status: string;
+    region: string;
+    country: string;
+    price_per_credit: number;
+    price_vs_regional_pct: number;
+    retirement_ratio_pct: number;
+    trust_score: number;
+    verifier: string;
+    last_updated: string;
+  };
+}
+
+interface MapComponentProps {
+  projects: ProjectFeature[];
+  selectedProjectId: string | null;
+  onSelectProject: (id: string) => void;
+}
+
+// Component to dynamically fly to the selected project position
+const RecenterMap = ({ activeProject }: { activeProject: ProjectFeature | null }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (activeProject) {
+      const [lon, lat] = activeProject.geometry.coordinates;
+      map.flyTo([lat, lon], 4, {
+        animate: true,
+        duration: 1.5,
+      });
+    }
+  }, [activeProject, map]);
+  return null;
+};
+
+export default function MapComponent({ projects, selectedProjectId, onSelectProject }: MapComponentProps) {
+  useEffect(() => {
+    setupLeafletIcon();
+  }, []);
+
+  const activeProject = projects.find(p => p.properties.id === selectedProjectId) || null;
+
+  // Custom icon style for electric cyan glow theme
+  const getCustomIcon = (registry: string, isActive: boolean) => {
+    const color = registry === 'Verra Registry' ? '#38BDF8' : '#818CF8';
+    const border = isActive ? '#FFFFFF' : 'rgba(255,255,255,0.4)';
+    const size = isActive ? '32px' : '24px';
+    const glow = isActive ? 'box-shadow: 0 0 12px #38BDF8;' : '';
+
+    return L.divIcon({
+      html: `<div style="
+        background-color: ${color}; 
+        width: ${size}; 
+        height: ${size}; 
+        border-radius: 50%; 
+        border: 2px solid ${border};
+        ${glow}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #030712;
+        font-weight: bold;
+        font-size: 10px;
+      ">${registry[0]}</div>`,
+      className: 'custom-leaflet-icon',
+      iconSize: isActive ? [32, 32] : [24, 24],
+      iconAnchor: isActive ? [16, 16] : [12, 12],
+    });
+  };
+
+  return (
+    <div className="w-full h-full relative border border-border rounded-lg overflow-hidden glass-panel">
+      <MapContainer
+        center={[0.0, 0.0]}
+        zoom={2}
+        scrollWheelZoom={true}
+        style={{ width: '100%', height: '100%' }}
+      >
+        {/* Dark map tiles matching Obsidian Black Theme */}
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        />
+        
+        {projects.map((proj) => {
+          const [lon, lat] = proj.geometry.coordinates;
+          const isActive = proj.properties.id === selectedProjectId;
+          
+          return (
+            <Marker
+              key={proj.properties.id}
+              position={[lat, lon]}
+              icon={getCustomIcon(proj.properties.registry, isActive)}
+              eventHandlers={{
+                click: () => onSelectProject(proj.properties.id),
+              }}
+            >
+              <Popup className="custom-popup">
+                <div className="p-2 bg-surface text-foreground font-sans text-xs min-w-[200px]">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] uppercase font-bold text-accent-primary">
+                      {proj.properties.id}
+                    </span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-border text-gray-400">
+                      {proj.properties.registry}
+                    </span>
+                  </div>
+                  <h4 className="font-semibold text-sm mb-2 text-white">{proj.properties.title}</h4>
+                  
+                  <div className="space-y-1 text-gray-300">
+                    <div className="flex justify-between">
+                      <span>Methodology:</span>
+                      <span className="text-white font-medium">{proj.properties.methodology.split(' ')[0]}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Price/Credit:</span>
+                      <span className="text-white font-medium">${proj.properties.price_per_credit.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>vs Regional Avg:</span>
+                      <span className={`font-semibold ${proj.properties.price_vs_regional_pct >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                        {proj.properties.price_vs_regional_pct >= 0 ? '+' : ''}{proj.properties.price_vs_regional_pct}%
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Retired ratio:</span>
+                      <span className="text-white font-medium">{proj.properties.retirement_ratio_pct}%</span>
+                    </div>
+                  </div>
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
+        <RecenterMap activeProject={activeProject} />
+      </MapContainer>
+    </div>
+  );
+}
+</file>
+
+<file path="frontend/tailwind.config.ts">
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: "#020a10",
+        foreground: "#f3f4f6",
+        surface: "#05121b",
+        accent: {
+          primary: "#38BDF8",   // Electric Cyan
+          secondary: "#818CF8", // Indigo
+        },
+        border: "#1F2937",
+      },
+    },
+  },
+  plugins: [],
+};
+export default config;
+</file>
+
+<file path="frontend/tsconfig.json">
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path="README.md">
+# Carbon Credit Registry Explorer (PoC 64)
+
+A modern, high-end fintech terminal dashboard for auditing and visualizing carbon offset registries (Verra and Gold Standard), under the "Governance & Trust" rail category.
+
+## Project Structure
+
+```text
+├── backend/
+│   ├── app/
+│   │   └── main.py          # FastAPI application & Pandas data orchestration
+│   ├── Dockerfile
+│   └── requirements.txt     # Python dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── page.tsx     # Main dashboard interface
+│   │   │   └── globals.css  # Theme tokens, styles, and custom scrollbars
+│   │   └── components/
+│   │       └── MapComponent.tsx # Dynamically loaded Leaflet map engine
+│   ├── Dockerfile
+│   └── package.json
+├── docker-compose.yml
+├── VAR_REPORT.md
+└── UAT_CHECKLIST.md
+```
+
+## Setup & Running Instructions
+
+### Direct Installation
+
+1. **Backend**:
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   uvicorn app.main:app --port 8000
+   ```
+
+2. **Frontend**:
+   ```bash
+   cd frontend
+   npm install --legacy-peer-deps
+   npm run dev
+   ```
+   Open [http://localhost:3001](http://localhost:3001) in your browser.
+
+### Docker Compose
+
+Build and run both services in containers:
+```bash
+docker-compose up --build
+```
+
+## Architecture Summary
+
+- **Frontend**: Next.js 14 (App Router) styled with Tailwind CSS to conform to the Obsidian Black theme (`#030712`). Displays geographic data on an interactive Leaflet map overlays, paired with Recharts volumetric and trust index charts.
+- **Backend**: FastAPI web server with Pandas orchestrating data inputs. Computes governance trust scores, regional pricing metrics, and exposes clean GeoJSON for mapping. Includes an automatic offline mock fallback on the client side.
+</file>
+
+<file path="UAT_CHECKLIST.md">
+# UAT Checklist — Carbon Credit Registry Explorer (PoC 64)
+
+This checklist verifies the functional requirements of the Carbon Credit Registry Explorer (PoC 64) under the **Level 2 (Cinematic Rail)** specification.
+
+| Test Case | Step / Description | Expected Result | Status |
+| :--- | :--- | :--- | :--- |
+| **TC-01: Marker Handshake** | Click a project marker on the 100% Map Stage. | The Dynamic Slide-over Panel slides in smoothly from the right, showing the project's details (Title, Metrics, Narrative sections). | **Pass** |
+| **TC-02: Ledger Handshake** | Click a row in the floating Registry Ledger Table. | The Map Stage flies smoothly to recenter on the selected coordinates, and the details slide-over panel opens. | **Pass** |
+| **TC-03: Slide-over Exit** | Click the close ("X") button in the Slide-over Panel header. | The panel slides out to the right, returning the dashboard to the full-screen cinematic visualization. | **Pass** |
+| **TC-04: Info Signature Popover**| Click the sleek Info `(i)` button in the transparent header. | A metadata modal popover opens displaying Developer details: Architect **Anjana KS**, Batch 4 Interns, Stack list. | **Pass** |
+| **TC-05: Filter Telemetry** | Select "Gold Standard Registry" in the Registry dropdown. | The Map markers and ledger table filter instantly to display only Gold Standard projects. No full-page refresh. | **Pass** |
+| **TC-06: Search Filter** | Type "Peatland" in the search filter box. | The ledger table filters in real-time to match only projects containing the keyword. | **Pass** |
+| **TC-07: Toggle Panes** | Click "Ledger Feed" or "Analytics" toggle buttons. | Respectively collapses or expands the floating glassmorphic panels on the left side of the map backdrop. | **Pass** |
+| **TC-08: Download Action** | Click "Download Sample Data" button in the slide-over. | Initiates download of a CSV file containing the project registry metadata. | **Pass** |
+| **TC-09: Mock Fallback** | Disconnect backend API server and reload. | Frontend detects offline state and switches seamlessly to local mock dataset with a warning indicator. | **Pass** |
+| **TC-10: Responsive Layout** | Shrink browser viewport to mobile width. | Slide-over panel adjusts to full width of viewport and ledger panel collapses cleanly. | **Pass** |
+</file>
+
+<file path="VAR_REPORT.md">
+# Visualization Audit Report (VAR) — Carbon Credit Registry Explorer (PoC 64)
+
+**Role**: Senior UX Architect / Product Reviewer  
+**Status**: **VAR PASS**  
+
+This report audits the Carbon Credit Registry Explorer (PoC 64) after implementing the **"Cinematic Rail" Brief (Level 2 Upgrade)** parameters.
+
+| Audit Parameter | Target Constraint | Current Implementation Status | Evaluation |
+| :--- | :--- | :--- | :--- |
+| **Requirement Match** | Visual archetype (Geo/Relational/Temporal) must match Excel's intent. | Interactive Leaflet Map for Geographic tracking, combined with Recharts Area/Bar charts for credit volume (temporal flow) and trust ratings. | **Pass** |
+| **DNA Check: Background** | Background must match specific Rail vibe (Deep Tinted Dark, Luminance < 10%). | Configured deep slate-teal tinted dark spectrum (`#020a10`, luminance < 10%) suitable for the **Governance & Trust** carbon offset theme. | **Pass** |
+| **DNA Check: Layout** | 100% full screen stage with dynamic slide-over. | Map Container expanded to **100% full-screen**. Sidebar replaced with a right-aligned **Dynamic Slide-over panel** triggered by map/ledger interaction. | **Pass** |
+| **DNA Check: Accents** | Electric Cyan (`#38BDF8`) for active states; Indigo (`#818CF8`) for overlays; borders Slate-800 (`#1F2937`). | Configured exactly. Map markers glow cyan on active selection; borders utilize custom Slate-800 theme; secondary markers colored Indigo. | **Pass** |
+| **Signature Header** | Minimalist transparent header bar with sleek Info `(i)` button. | Transparent header implemented with popover detailing Developer signature (Architect: **Anjana KS**, Batch 4 Interns, Stack). | **Pass** |
+| **Readability** | Tight letter-spacing using Inter/Geist Sans typography. | Inter font imported and mapped with `letter-spacing: -0.025em`. | **Pass** |
+| **Dashboard Storytelling** | High-level metrics leading into narratives and granular tabular ledger feeds. | Enforced clear hierarchy: Top-level counters -> Infrastructure Context ("Why This Matters") -> Governance Authority ("Who Controls the Rail") -> Detailed filterable data table. | **Pass** |
+
+---
+
+## Technical Recommendations / Improvements
+No failures identified. The "Cinematic view" provides an immersive and interactive visualization experience, successfully upgrading the dashboard layout from the static 70/30 split.
+</file>
+
+</files>

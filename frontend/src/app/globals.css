@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020a10;
+  --foreground: #f3f4f6;
+  --surface: #05121b;
+  --accent-primary: #38BDF8;
+  --accent-secondary: #818CF8;
+  --border: #1F2937;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.025em;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism style */
+.glass-panel {
+  background: rgba(11, 17, 23, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+/* Active cyan glow */
+.cyan-glow {
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+  border-color: var(--accent-primary) !important;
+}
+
+.cyan-text-glow {
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+/* Custom scrollbar for terminal/fintech style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Leaflet dark theme override */
+.leaflet-container {
+  background: #030712 !important;
+  width: 100%;
+  height: 100%;
+}
+.leaflet-bar a {
+  background-color: #0B1117 !important;
+  color: #38BDF8 !important;
+  border: 1px solid #1F2937 !important;
+}
+

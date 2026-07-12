@@ -1,0 +1,10 @@
+==================================================
+             UAT TEST AUTOMATION REPORT           
+==================================================
+Target URL: https://poc64.blackfield-8b7bf6a5.malaysiawest.azurecontainerapps.io
+Time: 2026-07-12 18:02:37
+--------------------------------------------------
+Test Case 1 (Visual Load): PASS
+Test Case 2 (The Handshake): PASS
+Test Case 3 (The Signature): PASS
+==================================================
